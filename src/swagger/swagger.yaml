@@ -1,0 +1,317 @@
+openapi: 3.1.1
+info:
+  title: Swagger Test - OpenAPI 3.0
+  description: "初めてのSwagger"
+  termsOfService: https://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+externalDocs:
+  description: Find out more about Swagger
+  url: https://swagger.io
+
+paths:
+  /ticket/list:
+    get: 
+      summary: "チケット全取得API"
+      description: "すべてのチケットの情報を返す"
+      tags:
+        - Ticket
+      responses:
+        200:
+          description: "成功時のレスポンス"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Ticket"
+  /ticket/time/{timeTableId}:
+    get:
+      summary: "タイムテーブルに基づくチケット取得API"
+      description: |
+        特定のタイムテーブルIDに関連するチケット情報を返す \
+        404ではなく空配列を返したい
+      tags:
+        - Ticket
+      parameters:
+      - name: "timeTableId"
+        in: "path"
+        description: "タイムテーブルID"
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: "成功時のレスポンス"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Ticket"
+        400:
+          $ref: "#/components/responses/BadRequest"
+  /ticket/detail/{ticketId}:
+    get:
+      summary: "チケットの詳細を取得するAPI"
+      description: "特定のIDのチケット情報を返す"
+      tags:
+        - Ticket
+      parameters:
+      - name: "ticketId"
+        in: "path"
+        description: "チケットID"
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: "成功時のレスポンス"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Ticket"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        404:
+          $ref: "#/components/responses/NotFound"
+  /ticket/new:
+    post:
+      tags:
+        - Ticket
+      summary: "新規チケットを作成するAPI"
+      description: "新しいチケットを作成し、その情報を返す"
+      requestBody:
+        description: "新規チケットの情報"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TicketRequest"
+      responses:
+        201:
+          description: "作成成功時のレスポンス"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Ticket"
+        400:
+          $ref: "#/components/responses/BadRequest"
+  /ticket/edit/{ticketId}:
+    put:
+      summary: "チケットを編集するAPI"
+      description: "特定のIDのチケットを編集し、その情報を返す"
+      tags:
+        - Ticket
+      parameters:
+      - name: "ticketId"
+        in: "path"
+        description: "チケットID"
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: "編集するチケットの情報"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TicketRequest"
+      responses:
+        200:
+          description: "編集成功時のレスポンス"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Ticket"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        404:
+          $ref: "#/components/responses/NotFound"
+  /ticket/delete/{ticketId}:
+    delete:
+      summary: "チケットを削除するAPI"
+      description: "特定のIDのチケットを削除する"
+      tags:
+        - Ticket
+      parameters:
+      - name: "ticketId"
+        in: "path"
+        description: "チケットID"
+        required: true
+        schema:
+          type: string
+      responses:
+        204:
+          description: "削除成功時のレスポンス"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        404:
+          $ref: "#/components/responses/NotFound"
+  
+  # =========================TIMETABLE================================
+  /time/list:
+    get:
+      summary: "タイムテーブル全取得API"
+      description: "すべてのタイムテーブルの情報を返す"
+      tags:
+        - TimeTable
+      responses:
+        200:
+          description: "成功時のレスポンス"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TimeTable"
+  /time/new:
+    post:
+      summary: "新規タイムテーブルを作成するAPI"
+      description: "新しいタイムテーブルを作成し、その情報を返す"
+      tags:
+        - TimeTable
+      requestBody:
+        description: "新規タイムテーブルの情報"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TimeTableRequest"
+      responses:
+        201:
+          description: "作成成功時のレスポンス"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeTable"
+        400:
+          $ref: "#/components/responses/BadRequest"
+  /time/edit/{timeTableId}:
+    put:
+      summary: "タイムテーブルを編集するAPI"
+      description: "特定のIDのタイムテーブルを編集し、その情報を返す"
+      tags:
+        - TimeTable
+      parameters:
+      - name: "timeTableId"
+        in: "path"
+        description: "タイムテーブルID"
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: "編集するタイムテーブルの情報"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TimeTableRequest"
+      responses:
+        200:
+          description: "編集成功時のレスポンス"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TimeTable"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        404:
+          $ref: "#/components/responses/NotFound"
+components:
+  schemas:
+    Ticket:
+      type: object
+      properties:
+        id:
+          type: number
+          example: 1
+        name:
+          type: string
+          example: "みけ"
+        ticketId:
+          type: number
+          example: 1
+        childrenNum:
+          type: number
+          example: 2
+        adultsNum:
+          type: number
+          example: 3
+        checked:
+          type: boolean
+          example: false
+        description:
+          type: string
+          example: "車いすあり"
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        timeTable:
+          $ref: "#/components/schemas/TimeTable"
+    TicketRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "みけ"
+        childrenNum:
+          type: number
+    TimeTable:
+      type: object
+      properties:
+        id:
+          type: number
+        time:
+          type: string
+          example: '2020-01-31T23:59:59+09:00'
+          format: date-time
+        tickets:
+          $ref: "#/components/schemas/Ticket"
+    TimeTableRequest:
+      type: object
+      properties:
+        time:
+          type: string
+          example: '2020-01-31T23:59:59+09:00'
+          format: date-time
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: string
+          description: "エラーコード"
+          enum:
+          - TICKET_NOT_FOUND
+          - INVALID_TICKET_ID
+          - INVALID_TICKET_REQUEST
+          - INVALID_TIME_REQUEST
+
+  responses:
+      NotFound:
+        description: "リソースが見つからない場合のレスポンス"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrorResponse"
+            examples:
+              ErrorResponse:
+                value:
+                  code: "TICKET_NOT_FOUND"
+      BadRequest:
+        description: "無効なリクエストの場合のレスポンス"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrorResponse"
+            examples:
+              ErrorResponse:
+                value:
+                  code: "INVALID_TICKET_REQUEST"
