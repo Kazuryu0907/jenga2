@@ -15,7 +15,7 @@ externalDocs:
 
 paths:
   /ticket/list:
-    get: 
+    get:
       summary: "チケット全取得API"
       description: "すべてのチケットの情報を返す"
       tags:
@@ -38,12 +38,12 @@ paths:
       tags:
         - Ticket
       parameters:
-      - name: "timeTableId"
-        in: "path"
-        description: "タイムテーブルID"
-        required: true
-        schema:
-          type: string
+        - name: "timeTableId"
+          in: "path"
+          description: "タイムテーブルID"
+          required: true
+          schema:
+            type: string
       responses:
         200:
           description: "成功時のレスポンス"
@@ -62,12 +62,12 @@ paths:
       tags:
         - Ticket
       parameters:
-      - name: "ticketId"
-        in: "path"
-        description: "チケットID"
-        required: true
-        schema:
-          type: string
+        - name: "ticketId"
+          in: "path"
+          description: "チケットID"
+          required: true
+          schema:
+            type: string
       responses:
         200:
           description: "成功時のレスポンス"
@@ -108,12 +108,12 @@ paths:
       tags:
         - Ticket
       parameters:
-      - name: "ticketId"
-        in: "path"
-        description: "チケットID"
-        required: true
-        schema:
-          type: string
+        - name: "ticketId"
+          in: "path"
+          description: "チケットID"
+          required: true
+          schema:
+            type: string
       requestBody:
         description: "編集するチケットの情報"
         required: true
@@ -139,12 +139,12 @@ paths:
       tags:
         - Ticket
       parameters:
-      - name: "ticketId"
-        in: "path"
-        description: "チケットID"
-        required: true
-        schema:
-          type: string
+        - name: "ticketId"
+          in: "path"
+          description: "チケットID"
+          required: true
+          schema:
+            type: string
       responses:
         204:
           description: "削除成功時のレスポンス"
@@ -152,7 +152,7 @@ paths:
           $ref: "#/components/responses/BadRequest"
         404:
           $ref: "#/components/responses/NotFound"
-  
+
   # =========================TIMETABLE================================
   /time/list:
     get:
@@ -198,12 +198,12 @@ paths:
       tags:
         - TimeTable
       parameters:
-      - name: "timeTableId"
-        in: "path"
-        description: "タイムテーブルID"
-        required: true
-        schema:
-          type: string
+        - name: "timeTableId"
+          in: "path"
+          description: "タイムテーブルID"
+          required: true
+          schema:
+            type: string
       requestBody:
         description: "編集するタイムテーブルの情報"
         required: true
@@ -271,7 +271,7 @@ components:
           type: number
         time:
           type: string
-          example: '2020-01-31T23:59:59+09:00'
+          example: "2020-01-31T23:59:59+09:00"
           format: date-time
         tickets:
           $ref: "#/components/schemas/Ticket"
@@ -280,7 +280,7 @@ components:
       properties:
         time:
           type: string
-          example: '2020-01-31T23:59:59+09:00'
+          example: "2020-01-31T23:59:59+09:00"
           format: date-time
     ErrorResponse:
       type: object
@@ -289,29 +289,29 @@ components:
           type: string
           description: "エラーコード"
           enum:
-          - TICKET_NOT_FOUND
-          - INVALID_TICKET_ID
-          - INVALID_TICKET_REQUEST
-          - INVALID_TIME_REQUEST
+            - TICKET_NOT_FOUND
+            - INVALID_TICKET_ID
+            - INVALID_TICKET_REQUEST
+            - INVALID_TIME_REQUEST
 
   responses:
-      NotFound:
-        description: "リソースが見つからない場合のレスポンス"
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ErrorResponse"
-            examples:
-              ErrorResponse:
-                value:
-                  code: "TICKET_NOT_FOUND"
-      BadRequest:
-        description: "無効なリクエストの場合のレスポンス"
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ErrorResponse"
-            examples:
-              ErrorResponse:
-                value:
-                  code: "INVALID_TICKET_REQUEST"
+    NotFound:
+      description: "リソースが見つからない場合のレスポンス"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+          examples:
+            ErrorResponse:
+              value:
+                code: "TICKET_NOT_FOUND"
+    BadRequest:
+      description: "無効なリクエストの場合のレスポンス"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+          examples:
+            ErrorResponse:
+              value:
+                code: "INVALID_TICKET_REQUEST"
