@@ -10,10 +10,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { isDefined } from "@/lib/utils";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type YupSchemaType =
-  | yup.ObjectSchema<FieldValues, any, unknown, any>
-  | undefined;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  yup.ObjectSchema<FieldValues, any, unknown, any> | undefined;
 
 export const StorybookFormProvider = ({
   children,
@@ -58,9 +57,9 @@ const SubmitButton = () => {
  * @param schema validation用のyup schema
  * @returns
  */
-// eslint-disable-next-line react/display-name
 export const withRHF =
   (schema: YupSchemaType = undefined) =>
+  // eslint-disable-next-line react/display-name
   (Story: FC): ReturnType<StoryFn<ReactElement>> => {
     return (
       <StorybookFormProvider yupSchema={schema}>
