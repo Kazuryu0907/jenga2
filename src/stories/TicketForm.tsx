@@ -1,20 +1,29 @@
 import { Input } from "./Input";
 import { Button2 } from "./Button2";
-import { TextArea } from "./TextArea";
+import { TextArea } from "./Textarea";
 import { Selector } from "./Selector";
 
-export function TicketForm() {
+import { useForm, SubmitHandler } from "react-hook-form";
+
+export interface TicketFormProps {
+  onSubmit: SubmitHandler<TicketFormSchema>;
+  valueToLabel: Map<string, string>;
+}
+
+export type TicketFormSchema = {
+  name: string;
+  time: string;
+  adults: number;
+  children: number;
+  notes: string;
+};
+export function TicketForm({ onSubmit, valueToLabel }: TicketFormProps) {
+  const { handleSubmit } = useForm<TicketFormSchema>();
   return (
-    <form>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Selector
         label="時間"
-        valueToLabel={
-          new Map([
-            ["morning", "Morning"],
-            ["afternoon", "Afternoon"],
-            ["evening", "Evening"],
-          ])
-        }
+        valueToLabel={valueToLabel}
         placeholder="時間帯を選択"
       />
       <Input label="名前" placeholder="みけ" />

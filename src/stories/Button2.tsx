@@ -23,6 +23,8 @@ export const Button2 = ({
         variant={variant}
         onClick={onClick}
         type={type}
+        role="button"
+        aria-label={label}
         disabled={disabled}
         {...props}
       >
