@@ -18,7 +18,7 @@ export const Button2 = ({
 }: ButtonProps) => {
   const variant = primary ? "default" : "outline";
   return (
-    <div>
+    <div className="mt-3 flex flex-wrap items-center gap-2 md:flex-row">
       <Button
         variant={variant}
         onClick={onClick}

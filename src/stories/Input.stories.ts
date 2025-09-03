@@ -12,19 +12,23 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Plane: Story = {
-  args: {},
+export const Label: Story = {
+  args: {
+    label: "Label",
+  },
 };
 
-export const Placeholder: Story = {
+export const PlaceholderAndLabel: Story = {
   args: {
     placeholder: "Enter text here",
+    label: "Label",
   },
 };
 
 export const Disabled: Story = {
   args: {
     placeholder: "Enter text here",
+    label: "Label",
     disabled: true,
   },
 };
