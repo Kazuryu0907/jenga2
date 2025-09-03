@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withRHF } from "./withRHF";
 import { TicketForm } from "./TicketForm";
+import { ticketFormSchema } from "@/business/validate/ticketFormValidate";
 
 const meta = {
   title: "Example/TicketForm",
@@ -43,7 +44,8 @@ export const Validated: Story = {
       ["evening", "Evening"],
     ]),
   },
+  decorators: [withRHF(ticketFormSchema, { adults: -1, children: -1 })],
   play: async ({ canvas, userEvent }) => {
-    await userEvent.click(canvas.getByRole("button"));
+    await userEvent.click(canvas.getByText("DEBUG SUBMIT"));
   },
 };

@@ -1,7 +1,13 @@
 import { Button } from "@/components/ui/button";
 
 export interface ButtonProps {
-  outline?: boolean;
+  variant?:
+    | "default"
+    | "secondary"
+    | "destructive"
+    | "outline"
+    | "ghost"
+    | "link";
   label: string;
   onClick?: () => void;
   disabled?: boolean;
@@ -12,11 +18,10 @@ export const Button2 = ({
   label,
   onClick,
   disabled,
-  outline: primary,
+  variant = "default",
   type,
   ...props
 }: ButtonProps) => {
-  const variant = primary ? "default" : "outline";
   return (
     <div className="mt-3 flex flex-wrap items-center gap-2 md:flex-row">
       <Button

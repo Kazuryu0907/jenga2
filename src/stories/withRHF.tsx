@@ -14,29 +14,34 @@ type YupSchemaType =
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   yup.ObjectSchema<FieldValues, any, unknown, any> | undefined;
 
+/**
+ *
+ * @param param0
+ * @returns
+ */
 export const StorybookFormProvider = ({
   children,
   yupSchema,
+  defaultValues,
 }: {
   children: React.ReactNode;
+  /** validationをする場合のyup schema */
   yupSchema: YupSchemaType;
+  /** Formのデフォルト値 */
+  defaultValues?: FieldValues;
 }) => {
+  // yupのschemaが指定された時だけvalidationする
   const props = isDefined(yupSchema)
     ? { resolver: yupResolver(yupSchema) }
     : {};
-  const methods = useForm(props);
+  const methods = useForm({ ...props, defaultValues });
   return <FormProvider {...methods}>{children}</FormProvider>;
 };
 
 const SubmitButton = () => {
   const { handleSubmit } = useFormContext();
   return (
-    <button
-      role="button"
-      id="DEBUG_SUBMIT"
-      type="submit"
-      onClick={handleSubmit(console.log)}
-    >
+    <button type="submit" onClick={handleSubmit(console.log)}>
       DEBUG SUBMIT
     </button>
   );
@@ -54,14 +59,15 @@ const SubmitButton = () => {
  * } satisfies Meta<typeof Button>
  * ```
  * @param schema validation用のyup schema
+ * @param defaultValues Formのデフォルト値
  * @returns
  */
 export const withRHF =
-  (schema: YupSchemaType = undefined) =>
+  (schema: YupSchemaType = undefined, defaultValues?: FieldValues) =>
   // eslint-disable-next-line react/display-name
   (Story: FC): ReturnType<StoryFn<ReactElement>> => {
     return (
-      <StorybookFormProvider yupSchema={schema}>
+      <StorybookFormProvider yupSchema={schema} defaultValues={defaultValues}>
         <Story />
         {/* validationが必要な時だけ，getByRolesでsubmitボタンを取得するため出現させる */}
         {isDefined(schema) && <SubmitButton />}

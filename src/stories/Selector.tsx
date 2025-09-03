@@ -14,6 +14,7 @@ import { useFormContext } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 export interface SelectorProps {
   label: string;
+  /** react-hook-formで使用するkey uniqueじゃないといけない */
   name: string;
   selectLabel?: string;
   placeholder: string;
@@ -42,7 +43,6 @@ export const Selector = ({
       </SelectItem>
     ),
   );
-  console.log(errors);
   return (
     <div className="mt-3">
       <Label className="mb-3">

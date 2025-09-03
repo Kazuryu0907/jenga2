@@ -64,6 +64,6 @@ export const Validated: Story = {
     ),
   ],
   play: async ({ canvas, userEvent }) => {
-    userEvent.click(canvas.getByTestId("DEBUG_SUBMIT"));
+    userEvent.click(canvas.getByText("DEBUG SUBMIT"));
   },
 };

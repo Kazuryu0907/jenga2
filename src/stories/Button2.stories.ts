@@ -21,13 +21,12 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     label: "Button",
-    outline: true,
   },
 };
 export const Outline: Story = {
   args: {
     label: "Button",
-    outline: false,
+    variant: "outline",
   },
 };
 

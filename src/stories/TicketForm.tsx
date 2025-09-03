@@ -3,65 +3,61 @@ import { Button2 } from "./Button2";
 import { TextArea } from "./Textarea";
 import { Selector } from "./Selector";
 
-import {
-  useForm,
-  SubmitHandler,
-  useWatch,
-  FormProvider,
-} from "react-hook-form";
+import { SubmitHandler, useFormContext, FieldValues } from "react-hook-form";
 import { Separator } from "@/components/ui/separator";
-import { yupResolver } from "@hookform/resolvers/yup";
-import {
-  ticketFormSchema,
-  TicketFormType,
-} from "@/business/validate/ticketFormValidate";
-import { createContext } from "react";
+import { TicketFormType } from "@/business/validate/ticketFormValidate";
 
 export interface TicketFormProps {
-  onSubmit: SubmitHandler<TicketFormType>;
+  onSubmit: SubmitHandler<FieldValues>;
   valueToLabel: Map<string, string>;
 }
 
 export function TicketForm({ onSubmit, valueToLabel }: TicketFormProps) {
-  const form = useForm({
-    resolver: yupResolver(ticketFormSchema),
-  });
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useFormContext<TicketFormType>();
+  /** 大人と子供のエラーをまとめて扱うための変数*/
+  const adultsAndChildrenErrors = errors.adults || errors.children;
   return (
-    <FormProvider {...form}>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Selector
-          label="時間"
-          valueToLabel={valueToLabel}
-          placeholder="時間帯を選択"
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Selector
+        name="time"
+        label="時間"
+        valueToLabel={valueToLabel}
+        placeholder="時間帯を選択"
+        required
+      />
+      <Input name="name" label="名前" placeholder="みけ" required />
+      <div className="flex justify-center">
+        {/* validation messageを2つに表示させると，片方だけerrorがでるとlayoutが崩れる */}
+        <Input
+          name="adults"
+          label="大人"
+          defaultValue={0}
+          type="number"
+          hiddenValidationMessage
           required
-          {...register("time")}
         />
-        <Input {...register("name")} label="名前" placeholder="みけ" required />
-        <div className="flex justify-center">
-          <Input
-            {...register("adults")}
-            label="大人"
-            placeholder="1"
-            type="number"
-            required
-          />
-          <Input
-            {...register("children")}
-            label="子供"
-            placeholder="0"
-            type="number"
-            required
-          />
-        </div>
-        <Separator className="my-5" />
-        <TextArea
-          {...register("notes")}
-          label="備考欄"
-          placeholder="車いすあり"
+        <Input
+          name="children"
+          label="子供"
+          defaultValue={0}
+          type="number"
+          hiddenValidationMessage
+          required
         />
-
-        <Button2 label="Submit" type="submit" />
-      </form>
-    </FormProvider>
+      </div>
+      {/* validation Messageを非表示にして，下に別でまとめて表示させる */}
+      <p className="text-red-500">{adultsAndChildrenErrors?.message}</p>
+      <Separator className="my-5" />
+      <TextArea
+        {...register("notes")}
+        label="備考欄"
+        placeholder="車いすあり"
+      />
+      <Button2 label="Submit" type="submit" />
+    </form>
   );
 }
