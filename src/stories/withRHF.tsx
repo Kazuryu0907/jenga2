@@ -32,7 +32,6 @@ const SubmitButton = () => {
   const { handleSubmit } = useFormContext();
   return (
     <button
-      hidden
       role="button"
       id="DEBUG_SUBMIT"
       type="submit"
@@ -64,7 +63,8 @@ export const withRHF =
     return (
       <StorybookFormProvider yupSchema={schema}>
         <Story />
-        <SubmitButton />
+        {/* validationが必要な時だけ，getByRolesでsubmitボタンを取得するため出現させる */}
+        {isDefined(schema) && <SubmitButton />}
       </StorybookFormProvider>
     );
   };

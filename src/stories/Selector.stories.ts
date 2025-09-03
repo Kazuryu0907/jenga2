@@ -8,13 +8,7 @@ const meta = {
   title: "Example/Selector",
   component: Selector,
   tags: ["autodocs"],
-  decorators: [
-    withRHF(
-      yup.object({
-        test: yup.string().required(),
-      }),
-    ),
-  ],
+  decorators: [withRHF()],
 } satisfies Meta<typeof Selector>;
 
 export default meta;
@@ -62,6 +56,13 @@ export const Validated: Story = {
     width: "w-[180px]",
     required: true,
   },
+  decorators: [
+    withRHF(
+      yup.object({
+        test: yup.string().required(),
+      }),
+    ),
+  ],
   play: async ({ canvas, userEvent }) => {
     userEvent.click(canvas.getByTestId("DEBUG_SUBMIT"));
   },
