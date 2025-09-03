@@ -42,6 +42,7 @@ export const Selector = ({
       </SelectItem>
     ),
   );
+  console.log(errors);
   return (
     <div className="mt-3">
       <Label className="mb-3">

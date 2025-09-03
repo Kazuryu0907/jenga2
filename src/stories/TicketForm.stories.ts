@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-
+import { withRHF } from "./withRHF";
 import { TicketForm } from "./TicketForm";
 
 const meta = {
@@ -9,6 +9,7 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
+  decorators: [withRHF()],
   // argTypes: {
 
   // }
