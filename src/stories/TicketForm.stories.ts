@@ -30,3 +30,19 @@ export const Default: Story = {
     ]),
   },
 };
+
+export const Validated: Story = {
+  args: {
+    onSubmit: (data) => {
+      console.log(data);
+    },
+    valueToLabel: new Map([
+      ["morning", "Morning"],
+      ["afternoon", "Afternoon"],
+      ["evening", "Evening"],
+    ]),
+  },
+  play: async ({ canvas, userEvent }) => {
+    await userEvent.click(canvas.getByRole("button"));
+  },
+};

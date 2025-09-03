@@ -15,6 +15,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     label: "Select an option",
+    name: "test",
     placeholder: "Please select",
     valueToLabel: new Map([
       ["option1", "Option 1"],
@@ -22,5 +23,20 @@ export const Default: Story = {
       ["option3", "Option 3"],
     ]),
     width: "w-[180px]",
+  },
+};
+
+export const Required: Story = {
+  args: {
+    label: "Select an option",
+    name: "test",
+    placeholder: "Please select",
+    valueToLabel: new Map([
+      ["option1", "Option 1"],
+      ["option2", "Option 2"],
+      ["option3", "Option 3"],
+    ]),
+    width: "w-[180px]",
+    required: true,
   },
 };

@@ -25,6 +25,14 @@ export const PlaceholderAndLabel: Story = {
   },
 };
 
+export const Required: Story = {
+  args: {
+    placeholder: "Enter text here",
+    label: "Label",
+    required: true,
+  },
+};
+
 export const Disabled: Story = {
   args: {
     placeholder: "Enter text here",
