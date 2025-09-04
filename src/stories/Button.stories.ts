@@ -2,18 +2,18 @@ import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
 import { fn } from "storybook/internal/test";
 
-import { Button2 } from "./Button2";
+import { Button } from "../components/common/Button";
 
 const meta = {
-  title: "Example/Button2",
-  component: Button2,
+  title: "Example/Button",
+  component: Button,
   parameters: {},
   tags: ["autodocs"],
   argTypes: {
     // backgroundColor: { control: "color" },
   },
   args: { onClick: fn() },
-} satisfies Meta<typeof Button2>;
+} satisfies Meta<typeof Button>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -29,7 +29,12 @@ export const Outline: Story = {
     variant: "outline",
   },
 };
-
+export const Destructive: Story = {
+  args: {
+    label: "Button",
+    variant: "destructive",
+  },
+};
 export const Disabled: Story = {
   args: {
     label: "Button",

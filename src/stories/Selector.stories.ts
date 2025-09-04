@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
-import { Selector } from "./Selector";
+import { Selector } from "../components/common/Selector";
 import { withRHF } from "./withRHF";
 import * as yup from "yup";
 

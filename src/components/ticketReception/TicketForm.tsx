@@ -1,7 +1,7 @@
-import { Input } from "./Input";
-import { Button2 } from "./Button2";
-import { TextArea } from "./Textarea";
-import { Selector } from "./Selector";
+import { Input } from "../common/Input";
+import { Button } from "../common/Button";
+import { TextArea } from "../common/Textarea";
+import { Selector } from "../common/Selector";
 
 import { SubmitHandler, useFormContext, FieldValues } from "react-hook-form";
 import { Separator } from "@/components/ui/separator";
@@ -57,7 +57,7 @@ export function TicketForm({ onSubmit, valueToLabel }: TicketFormProps) {
         label="備考欄"
         placeholder="車いすあり"
       />
-      <Button2 label="Submit" type="submit" />
+      <Button label="Submit" type="submit" />
     </form>
   );
 }

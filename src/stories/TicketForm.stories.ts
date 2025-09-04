@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 import { withRHF } from "./withRHF";
-import { TicketForm } from "./TicketForm";
+import { TicketForm } from "../components/ticketReception/TicketForm";
 import { ticketFormSchema } from "@/business/validate/ticketFormValidate";
 
 const meta = {
