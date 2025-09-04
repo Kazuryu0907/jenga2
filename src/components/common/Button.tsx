@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button as ShButton } from "@/components/ui/button";
 
 export interface ButtonProps {
   variant?:
@@ -14,7 +14,7 @@ export interface ButtonProps {
   type?: "button" | "submit" | "reset";
 }
 
-export const Button2 = ({
+export const Button = ({
   label,
   onClick,
   disabled,
@@ -24,7 +24,7 @@ export const Button2 = ({
 }: ButtonProps) => {
   return (
     <div className="mt-3 flex flex-wrap items-center gap-2 md:flex-row">
-      <Button
+      <ShButton
         variant={variant}
         onClick={onClick}
         type={type}
@@ -34,7 +34,7 @@ export const Button2 = ({
         {...props}
       >
         {label}
-      </Button>
+      </ShButton>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import { Input } from "../common/Input";
-import { Button2 } from "../common/Button2";
+import { Button } from "../common/Button";
 import { TextArea } from "../common/Textarea";
 import { Selector } from "../common/Selector";
 
@@ -57,7 +57,7 @@ export function TicketForm({ onSubmit, valueToLabel }: TicketFormProps) {
         label="備考欄"
         placeholder="車いすあり"
       />
-      <Button2 label="Submit" type="submit" />
+      <Button label="Submit" type="submit" />
     </form>
   );
 }
