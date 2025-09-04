@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
 import { fn } from "storybook/internal/test";
 
-import { Button2 } from "./Button2";
+import { Button2 } from "../components/common/Button2";
 
 const meta = {
   title: "Example/Button2",

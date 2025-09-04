@@ -1,7 +1,7 @@
-import { Input } from "./Input";
-import { Button2 } from "./Button2";
-import { TextArea } from "./Textarea";
-import { Selector } from "./Selector";
+import { Input } from "../common/Input";
+import { Button2 } from "../common/Button2";
+import { TextArea } from "../common/Textarea";
+import { Selector } from "../common/Selector";
 
 import { SubmitHandler, useFormContext, FieldValues } from "react-hook-form";
 import { Separator } from "@/components/ui/separator";
