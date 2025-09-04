@@ -43,9 +43,10 @@ export const Selector = ({
       </SelectItem>
     ),
   );
+  const selectId = `select-${name}`;
   return (
     <div className="mt-3">
-      <Label className="mb-3">
+      <Label htmlFor={selectId} className="mb-3">
         {label}
         {required && <Badge variant="destructive" label="必須" />}
       </Label>
@@ -53,7 +54,7 @@ export const Selector = ({
         <SelectTrigger className={clsx(width)}>
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent id={selectId}>
           <SelectGroup>
             <SelectLabel>{selectLabel}</SelectLabel>
             {selectItemsComponent}

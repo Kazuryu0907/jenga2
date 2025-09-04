@@ -9,9 +9,6 @@ const meta = {
   component: Button,
   parameters: {},
   tags: ["autodocs"],
-  argTypes: {
-    // backgroundColor: { control: "color" },
-  },
   args: { onClick: fn() },
 } satisfies Meta<typeof Button>;
 

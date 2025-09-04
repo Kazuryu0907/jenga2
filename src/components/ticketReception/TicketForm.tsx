@@ -29,7 +29,7 @@ export function TicketForm({ onSubmit, valueToLabel }: TicketFormProps) {
         placeholder="時間帯を選択"
         required
       />
-      <Input name="name" label="名前" placeholder="みけ" required />
+      <Input name="userName" label="名前" placeholder="みけ" required />
       <div className="flex justify-center">
         {/* validation messageを2つに表示させると，片方だけerrorがでるとlayoutが崩れる */}
         <Input

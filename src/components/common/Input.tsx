@@ -34,14 +34,15 @@ export const Input = ({
     register,
     formState: { errors },
   } = useFormContext();
+  const inputId = `input-${name}`;
   return (
     <div className="mt-3 grid w-full max-w-sm items-center gap-3">
-      <Label htmlFor="input-id">
+      <Label htmlFor={inputId}>
         {label}
         {required && <Badge variant="destructive" label="必須" />}
       </Label>
       <ShaInput
-        id="input-id"
+        id={inputId}
         placeholder={placeholder}
         type={type}
         defaultValue={defaultValue}
