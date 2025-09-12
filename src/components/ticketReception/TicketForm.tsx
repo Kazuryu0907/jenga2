@@ -15,7 +15,6 @@ export interface TicketFormProps {
 export function TicketForm({ onSubmit, valueToLabel }: TicketFormProps) {
   const {
     handleSubmit,
-    register,
     formState: { errors },
   } = useFormContext<TicketFormType>();
   /** 大人と子供のエラーをまとめて扱うための変数*/
@@ -52,11 +51,7 @@ export function TicketForm({ onSubmit, valueToLabel }: TicketFormProps) {
       {/* validation Messageを非表示にして，下に別でまとめて表示させる */}
       <p className="text-red-500">{adultsAndChildrenErrors?.message}</p>
       <Separator className="my-5" />
-      <TextArea
-        {...register("notes")}
-        label="備考欄"
-        placeholder="車いすあり"
-      />
+      <TextArea name="notes" label="備考欄" placeholder="車いすあり" />
       <Button label="Submit" type="submit" />
     </form>
   );
